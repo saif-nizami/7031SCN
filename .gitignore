@@ -1,0 +1,5 @@
+data/*
+yolov8n.pt
+configs/__pycache__
+utils/__pycache__
+runs
