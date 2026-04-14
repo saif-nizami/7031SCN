@@ -3,3 +3,41 @@ yolov8n.pt
 configs/__pycache__
 utils/__pycache__
 runs
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Optional (recommended)
+*.py[cod]
+*$py.class
+
+# 🔥 Python cache (ALL folders, recursive)
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# 🔥 Bytecode & compiled
+*.pyo
+*.pyd
+
+# 🔥 Virtual environments
+venv/
+env/
+.venv/
+
+# 🔥 VS Code / IDE
+.vscode/
+.idea/
+
+# 🔥 OS files
+.DS_Store
+Thumbs.db
+
+# 🔥 Logs
+*.log
+
+**/__pycache__/

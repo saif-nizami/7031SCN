@@ -15,12 +15,13 @@ import random
 import numpy as np
 
 def get_device():
-    if torch.cuda.is_available():
-        return 0
-    elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
-        return "mps"   # Apple Silicon GPU
-    else:
-        return "cpu"
+    return 0
+    # if torch.cuda.is_available():
+    #     return 0
+    # elif hasattr(torch.backends, "mps") and torch.backends.mps.is_available():
+    #     return "mps"   # Apple Silicon GPU
+    # else:
+    #     return "cpu"
 
 
 def set_seed(seed):

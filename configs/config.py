@@ -16,7 +16,7 @@ CONFIG = {
     "epochs": 1,              # 🔥 increase from 1 (1 is too low)
     "img_size": 640,
     "batch_size": 8,          # safer for MPS
-    "device": "mps",          # ✅ FIXED
+    "device": "cuda",          # ✅ FIXED
     "project": "outputs",
     "experiment_name": "yolov8_exp",
     "exist_ok": True,         # ✅ prevent folder duplication
