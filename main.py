@@ -11,6 +11,9 @@ from utils.save_metrics import save_metrics
 # fasterRCNN
 from models.faster_rcnn.train import train_model as train_frcnn
 
+# DETR
+from models.detr.train import train_model as train_detr
+
 def run_yolov8():
     print("\n🚀 Running YOLOv8 Pipeline...\n")
 
@@ -25,9 +28,13 @@ def run_yolov8():
     pred_yolo(model_path, "data/coco_yolo/images/val")
 
 def run_fasterrcnn():
-    print("\n🚀 Running YOLOv8 Pipeline...\n")
-
+    print("\n🚀 Running Faster R-CNN Pipeline...\n")
     train_frcnn(CONFIG)
+
+def run_detr():
+    print("\n🚀 Running DETR Pipeline...\n")
+    train_detr(CONFIG)
+
 
 
 
@@ -36,8 +43,8 @@ def show_menu():
     print(" Select Model to Run ")
     print("==============================")
     print("1. YOLOv8")
-    print("2. Faster R-CNN (Coming Soon)")
-    print("3. DETR (Coming Soon)")
+    print("2. Faster R-CNN")
+    print("3. DETR")
     print("4. Exit")
     print("==============================")
 
@@ -57,10 +64,11 @@ def main():
             CONFIG["experiment_name"] = "faster_rcnn"
             run_fasterrcnn()
 
-
         elif choice == "3":
-            print("\n🚧 DETR not implemented yet\n")
-            sys.exit(130)
+            # print("\n🚧 DETR not implemented yet\n")
+            # sys.exit(130)
+            CONFIG["experiment_name"] = "detr"
+            run_detr()
 
         elif choice == "4":
             print("\n👋 Exiting...")

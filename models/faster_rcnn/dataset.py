@@ -64,7 +64,8 @@ class COCODataset(torch.utils.data.Dataset):
 
         target = {
             "boxes": boxes,
-            "labels": labels
+            "labels": labels,
+            "image_id": torch.tensor([img_id])   # 🔥 REQUIRED
         }
 
         if self.transforms:

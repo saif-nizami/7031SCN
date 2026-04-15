@@ -41,3 +41,5 @@ Thumbs.db
 *.log
 
 **/__pycache__/
+
+outputs/*

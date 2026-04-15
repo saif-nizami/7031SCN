@@ -15,7 +15,7 @@ random.seed(42)
 def create_subset(split, size):
     print(f"\n🔧 Processing {split}...")
 
-    img_dir = f"{SOURCE}/images/{split}2017"
+    img_dir = f"{SOURCE}/{split}2017"
     ann_file = f"{SOURCE}/annotations/instances_{split}2017.json"
 
     with open(ann_file) as f:
