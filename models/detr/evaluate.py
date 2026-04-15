@@ -78,6 +78,63 @@ def evaluate(model, loader, device):
 
     return precision, recall
 
+# ------------ EVALUATE COCO -----------
+from pycocotools.coco import COCO
+from pycocotools.cocoeval import COCOeval
+import json
+
+def evaluate_coco(model, loader, device):
+    model.eval()
+    results = []
+
+    with torch.no_grad():
+        count = 0
+        for images, targets in list(loader)[:50]:
+            count = count + 1
+            print("count :", count)
+            images = [img.to(device) for img in images]
+            pixel_values = torch.stack(images)
+
+            outputs = model(pixel_values=pixel_values)
+
+            # convert outputs
+            target_sizes = torch.tensor(
+                [img.shape[-2:] for img in images]
+            ).to(device)
+
+            processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50")
+
+            preds = processor.post_process_object_detection(
+                outputs,
+                target_sizes=target_sizes,
+                threshold=0.1
+            )
+
+            for pred, target in zip(preds, targets):
+                image_id = int(target.get("image_id", 0))
+
+                for box, score, label in zip(
+                    pred["boxes"], pred["scores"], pred["labels"]
+                ):
+                    x1, y1, x2, y2 = box.tolist()
+
+                    results.append({
+                        "image_id": image_id,
+                        "category_id": int(label),
+                        "bbox": [x1, y1, x2-x1, y2-y1],
+                        "score": float(score)
+                    })
+
+    with open("detr_preds.json", "w") as f:
+        json.dump(results, f)
+
+    coco_gt = COCO("data/coco_faster_rcnn_subset/annotations/instances_train2017.json")
+    coco_dt = coco_gt.loadRes("detr_preds.json")
+
+    coco_eval = COCOeval(coco_gt, coco_dt, "bbox")
+    coco_eval.evaluate()
+    coco_eval.accumulate()
+    coco_eval.summarize()
 
 # ---------------- MAIN ----------------
 if __name__ == "__main__":
@@ -115,4 +172,5 @@ if __name__ == "__main__":
     # ).to(device)
     # model.load_state_dict(torch.load("outputs/detr.pth", map_location=device, weights_only=True))
 
-    evaluate(model, loader, device)
+    # evaluate(model, loader, device)
+    evaluate_coco(model, loader, device)
