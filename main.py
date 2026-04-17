@@ -17,11 +17,11 @@ from models.detr.train import train_model as train_detr
 def run_yolov8():
     print("\n🚀 Running YOLOv8 Pipeline...\n")
 
-    train_yolo(CONFIG)
+    # train_yolo(CONFIG)
     results = train_yolo(CONFIG)
     model_path = f"{results.save_dir}/weights/best.pt"
     print("📁 Using model from:", model_path)
-    # model_path = f"{CONFIG['project']}/{CONFIG['experiment_name']}/weights/best.pt"
+    # # model_path = f"{CONFIG['project']}/{CONFIG['experiment_name']}/weights/best.pt"
 
     metrics = val_yolo(model_path)
     save_metrics(metrics, "yolov8")

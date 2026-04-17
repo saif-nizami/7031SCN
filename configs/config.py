@@ -13,7 +13,7 @@
 CONFIG = {
     "model_name": "yolov8n.pt",
     "data_yaml": "data/coco_yolo_subset/dataset.yaml",
-    "epochs": 1,              # 🔥 increase from 1 (1 is too low)
+    "epochs": 5,              # 🔥 increase from 1 (1 is too low)
     "img_size": 640,
     "batch_size": 8,          # safer for MPS
     "device": "cuda",          # ✅ FIXED
