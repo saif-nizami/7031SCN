@@ -8,7 +8,6 @@ import json
 
 from models.faster_rcnn.dataset import COCODataset
 
-
 def get_transform():
     return T.Compose([
         T.ToTensor()
