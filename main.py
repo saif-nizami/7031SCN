@@ -35,9 +35,9 @@ def run_detr():
     print("\nRunning DETR Pipeline...\n")
     train_detr(CONFIG)
 
-def show_menu():
+def show_main_menu():
     print("\n==============================")
-    print(" Select Model to Run ")
+    print(" Select Model")
     print("==============================")
     print("1. YOLOv8")
     print("2. Faster R-CNN")
@@ -45,9 +45,18 @@ def show_menu():
     print("4. Exit")
     print("==============================")
 
+def show_L2_menu():
+    print("\n==============================")
+    print(" Select Operation")
+    print("==============================")
+    print("1. Train")
+    print("2. Evaluate")
+    print("3. Exit")
+    print("==============================")
+
 def main():
     while True:
-        show_menu()
+        show_main_menu()
         choice = input("Enter your choice (1-4): ").strip()
 
         if choice == "1":
