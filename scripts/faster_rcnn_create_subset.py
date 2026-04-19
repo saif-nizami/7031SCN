@@ -51,7 +51,7 @@ def create_subset(split, size):
     with open(f"{DEST}/annotations/instances_{split}2017.json", "w") as f:
         json.dump(new_coco, f)
 
-    print(f"✅ {split}: {len(selected_images)} images")
+    print(f"{split}: {len(selected_images)} images")
 
 
 def main():
@@ -60,7 +60,7 @@ def main():
     create_subset("train", TRAIN_SIZE)
     create_subset("val", VAL_SIZE)
 
-    print("\n🎉 Subset ready at:", DEST)
+    print("\nSubset ready at:", DEST)
 
 
 if __name__ == "__main__":

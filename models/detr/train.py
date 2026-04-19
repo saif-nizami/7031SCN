@@ -38,13 +38,13 @@ class CollateFn:
 # TRAIN
 # =========================
 def train_model(config):
-    print("🚀 Training DETR (stable mode)...")
+    print("Training DETR (stable mode)...")
 
     os.makedirs("outputs", exist_ok=True)
 
     processor = DetrImageProcessor.from_pretrained(
         "facebook/detr-resnet-50",
-        size={"shortest_edge": 512, "longest_edge": 512}  # 🔥 speed + stability
+        size={"shortest_edge": 512, "longest_edge": 512}  # speed + stability
     )
 
     dataset = COCODataset(
@@ -73,7 +73,7 @@ def train_model(config):
     model.train()
 
     for epoch in range(config["epochs"]):
-        print(f"\n📘 Epoch [{epoch+1}/{config['epochs']}]")
+        print(f"\nEpoch [{epoch+1}/{config['epochs']}]")
 
         loop = tqdm(loader)
 
@@ -85,7 +85,7 @@ def train_model(config):
             outputs = model(pixel_values=pixel_values, labels=labels)
             loss = outputs.loss
 
-            # 🔥 hard NaN guard
+            # hard NaN guard
             if not torch.isfinite(loss):
                 print("⚠️ Skipping bad batch")
                 continue
@@ -93,7 +93,7 @@ def train_model(config):
             optimizer.zero_grad()
             loss.backward()
 
-            # 🔥 gradient clipping (prevents NaN)
+            # gradient clipping (prevents NaN)
             torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
 
             optimizer.step()
@@ -110,7 +110,7 @@ def train_model(config):
 # =========================
 if __name__ == "__main__":
     config = {
-        "epochs": 3   # 🔥 keep small for stability
+        "epochs": 5
     }
 
     train_model(config)

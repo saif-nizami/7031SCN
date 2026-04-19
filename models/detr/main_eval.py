@@ -62,7 +62,7 @@ def evaluate_model(model, dataloader, coco_gt, device, processor):
 
             processed = processor.post_process_object_detection(
                 outputs,
-                threshold=0.1,  # 🔥 important for DETR
+                threshold=0.1,
                 target_sizes=[(512, 512)] * pixel_values.shape[0]
             )
 
@@ -78,13 +78,13 @@ def evaluate_model(model, dataloader, coco_gt, device, processor):
 
                     results.append({
                         "image_id": img_id,
-                        "category_id": int(label),  # ✅ correct (no remap)
+                        "category_id": int(label),
                         "bbox": [x1, y1, x2 - x1, y2 - y1],
                         "score": float(score)
                     })
 
     if len(results) == 0:
-        print("❌ No detections → model likely undertrained")
+        print("No detections → model likely undertrained")
         return
 
     # =========================
@@ -121,7 +121,7 @@ def evaluate_model(model, dataloader, coco_gt, device, processor):
 # =========================
 if __name__ == "__main__":
 
-    print("🚀 Running DETR evaluation (FINAL)...")
+    print("Running DETR evaluation (FINAL)...")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -149,7 +149,7 @@ if __name__ == "__main__":
     # 🔥 CRITICAL FIX → match training
     model = DetrForObjectDetection.from_pretrained(
         "facebook/detr-resnet-50",
-        num_labels=91  # 🔥 MUST match your checkpoint
+        num_labels=91
     )
 
     model.load_state_dict(torch.load("outputs/detr.pth", map_location=device))

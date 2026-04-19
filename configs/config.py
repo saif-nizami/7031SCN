@@ -13,12 +13,12 @@
 CONFIG = {
     "model_name": "yolov8n.pt",
     "data_yaml": "data/coco_yolo_subset/dataset.yaml",
-    "epochs": 5,              # 🔥 increase from 1 (1 is too low)
+    "epochs": 5,             
     "img_size": 640,
-    "batch_size": 8,          # safer for MPS
-    "device": "cuda",          # ✅ FIXED
+    "batch_size": 8,         
+    "device": "cuda",        
     "project": "outputs",
     "experiment_name": "yolov8_exp",
-    "exist_ok": True,         # ✅ prevent folder duplication
+    "exist_ok": True,
     "seed": 42
 }

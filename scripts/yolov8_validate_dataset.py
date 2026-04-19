@@ -10,14 +10,14 @@ def validate_split(image_dir, label_dir):
     removed_images = 0
     removed_labels = 0
 
-    print(f"\n🔍 Validating: {image_dir}")
+    print(f"\nValidating: {image_dir}")
 
     images = list(image_dir.glob("*.jpg"))
 
     for img_path in images:
         label_path = label_dir / (img_path.stem + ".txt")
 
-        # ❌ Case 1: Label missing
+        # Case 1: Label missing
         if not label_path.exists():
             img_path.unlink()
             removed_images += 1
@@ -28,14 +28,14 @@ def validate_split(image_dir, label_dir):
             with open(label_path, "r") as f:
                 lines = [line.strip() for line in f.readlines() if line.strip()]
         except:
-            # ❌ Corrupt file
+            # Corrupt file
             img_path.unlink()
             label_path.unlink(missing_ok=True)
             removed_images += 1
             removed_labels += 1
             continue
 
-        # ❌ Case 2: Empty label file
+        # Case 2: Empty label file
         if len(lines) == 0:
             img_path.unlink()
             label_path.unlink()
@@ -48,7 +48,7 @@ def validate_split(image_dir, label_dir):
         for line in lines:
             parts = line.split()
 
-            # ❌ Wrong format
+            # Wrong format
             if len(parts) != 5:
                 valid = False
                 break
@@ -56,7 +56,7 @@ def validate_split(image_dir, label_dir):
             try:
                 cls, x, y, w, h = map(float, parts)
 
-                # ❌ Invalid values
+                # Invalid values
                 if not (0 <= x <= 1 and 0 <= y <= 1 and 0 <= w <= 1 and 0 <= h <= 1):
                     valid = False
                     break
@@ -69,7 +69,7 @@ def validate_split(image_dir, label_dir):
                 valid = False
                 break
 
-        # ❌ Case 3: Invalid label content
+        # Case 3: Invalid label content
         if not valid:
             img_path.unlink()
             label_path.unlink(missing_ok=True)
@@ -78,9 +78,9 @@ def validate_split(image_dir, label_dir):
         else:
             valid_count += 1
 
-    print(f"✅ Valid images: {valid_count}")
-    print(f"❌ Removed images: {removed_images}")
-    print(f"❌ Removed labels: {removed_labels}")
+    print(f"Valid images: {valid_count}")
+    print(f"Removed images: {removed_images}")
+    print(f"Removed labels: {removed_labels}")
 
 
 def remove_orphan_labels(image_dir, label_dir):
@@ -98,11 +98,11 @@ def remove_orphan_labels(image_dir, label_dir):
             label_path.unlink()
             removed += 1
 
-    print(f"❌ Removed orphan labels: {removed}")
+    print(f"Removed orphan labels: {removed}")
 
 
 def main():
-    print("\n🚀 Starting dataset validation...\n")
+    print("\nStarting dataset validation...\n")
 
     # Train split
     validate_split(
@@ -126,7 +126,7 @@ def main():
         label_dir="data/coco_yolo/labels/val"
     )
 
-    print("\n🎉 Dataset validation COMPLETE!\n")
+    print("\nDataset validation COMPLETE!\n")
 
 
 if __name__ == "__main__":

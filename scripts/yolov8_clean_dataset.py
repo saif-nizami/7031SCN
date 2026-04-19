@@ -15,4 +15,4 @@ for img in images:
         os.remove(os.path.join(image_dir, img))
         removed += 1
 
-print(f"✅ Removed {removed} images without labels")
+print(f"Removed {removed} images without labels")

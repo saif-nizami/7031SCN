@@ -10,4 +10,4 @@ def save_metrics(metrics, model_name):
     with open(path, "w") as f:
         json.dump(metrics, f, indent=4)
 
-    print(f"\n💾 Metrics saved to: {path}")
+    print(f"\nMetrics saved to: {path}")

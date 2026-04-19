@@ -2,7 +2,7 @@ from ultralytics import YOLO
 
 
 def run_inference(model_path, source):
-    print("🔍 Running inference...")
+    print("Running inference...")
 
     model = YOLO(model_path)
 
@@ -12,6 +12,6 @@ def run_inference(model_path, source):
         conf=0.25
     )
 
-    print("✅ Inference complete!")
+    print("Inference complete!")
 
     return results

@@ -35,16 +35,16 @@ def create_subset(split, size):
         shutil.copy(img_path, dst_img / img_path.name)
         shutil.copy(lbl_path, dst_lbl / lbl_path.name)
 
-    print(f"✅ {split}: {len(selected)} images copied")
+    print(f"{split}: {len(selected)} images copied")
 
 
 def main():
-    print("🚀 Creating subset dataset...\n")
+    print("Creating subset dataset...\n")
 
     create_subset("train", TRAIN_SIZE)
     create_subset("val", VAL_SIZE)
 
-    print("\n🎉 Subset created at:", DEST)
+    print("\nSubset created at:", DEST)
 
 
 if __name__ == "__main__":

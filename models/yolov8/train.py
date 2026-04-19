@@ -1,6 +1,6 @@
 import torch
 
-# 🔥 FIX PyTorch 2.6 issue globally
+# FIX PyTorch 2.6 issue globally
 _original_torch_load = torch.load
 
 def patched_torch_load(*args, **kwargs):
@@ -32,7 +32,7 @@ def set_seed(seed):
 
 
 def train_model(config):
-    print("🚀 Training YOLOv8...")
+    print("Training YOLOv8...")
 
     set_seed(config["seed"])
 
@@ -41,18 +41,7 @@ def train_model(config):
     model.info()
 
     device = get_device()
-    print(f"🔥 Using device: {device}")
-
-    # results = model.train(
-    #     data=config["data_yaml"],
-    #     epochs=config["epochs"],
-    #     imgsz=config["img_size"],
-    #     batch=config["batch_size"],
-    #     device=device, #config["device"],
-    #     project=config["project"],
-    #     name=config["experiment_name"],
-    #     verbose=True
-    # )
+    print(f"Using device: {device}")
 
     results = model.train(
         data=config["data_yaml"],
@@ -62,10 +51,10 @@ def train_model(config):
         device=device, #config["device"],
         project=config["project"],
         name=config["experiment_name"],
-        exist_ok=config["exist_ok"],   # ✅ ADD THIS
+        exist_ok=config["exist_ok"],
         verbose=True
     )
 
-    print("✅ Training complete!")
+    print("Training complete!")
 
     return results
