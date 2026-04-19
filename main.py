@@ -15,12 +15,12 @@ from models.faster_rcnn.train import train_model as train_frcnn
 from models.detr.train import train_model as train_detr
 
 def run_yolov8():
-    print("\n🚀 Running YOLOv8 Pipeline...\n")
+    print("\nRunning YOLOv8 Pipeline...\n")
 
     # train_yolo(CONFIG)
     results = train_yolo(CONFIG)
     model_path = f"{results.save_dir}/weights/best.pt"
-    print("📁 Using model from:", model_path)
+    print("Using model from:", model_path)
     # # model_path = f"{CONFIG['project']}/{CONFIG['experiment_name']}/weights/best.pt"
 
     metrics = val_yolo(model_path)
@@ -28,15 +28,12 @@ def run_yolov8():
     pred_yolo(model_path, "data/coco_yolo/images/val")
 
 def run_fasterrcnn():
-    print("\n🚀 Running Faster R-CNN Pipeline...\n")
+    print("\nRunning Faster R-CNN Pipeline...\n")
     train_frcnn(CONFIG)
 
 def run_detr():
-    print("\n🚀 Running DETR Pipeline...\n")
+    print("\nRunning DETR Pipeline...\n")
     train_detr(CONFIG)
-
-
-
 
 def show_menu():
     print("\n==============================")
@@ -48,7 +45,6 @@ def show_menu():
     print("4. Exit")
     print("==============================")
 
-
 def main():
     while True:
         show_menu()
@@ -59,13 +55,13 @@ def main():
             run_yolov8()
 
         elif choice == "2":
-            # print("\n🚧 Faster R-CNN not implemented yet\n")
+            # print("\nFaster R-CNN not implemented yet\n")
             # sys.exit(130)
             CONFIG["experiment_name"] = "faster_rcnn"
             run_fasterrcnn()
 
         elif choice == "3":
-            # print("\n🚧 DETR not implemented yet\n")
+            # print("\nDETR not implemented yet\n")
             # sys.exit(130)
             CONFIG["experiment_name"] = "detr"
             run_detr()
@@ -75,7 +71,7 @@ def main():
             sys.exit(0)
 
         else:
-            print("\n❌ Invalid choice, try again!\n")
+            print("\nInvalid choice, try again!\n")
 
 
 if __name__ == "__main__":
