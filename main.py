@@ -55,14 +55,10 @@ def main():
             run_yolov8()
 
         elif choice == "2":
-            # print("\nFaster R-CNN not implemented yet\n")
-            # sys.exit(130)
             CONFIG["experiment_name"] = "faster_rcnn"
             run_fasterrcnn()
 
         elif choice == "3":
-            # print("\nDETR not implemented yet\n")
-            # sys.exit(130)
             CONFIG["experiment_name"] = "detr"
             run_detr()
 
