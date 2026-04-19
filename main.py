@@ -54,24 +54,66 @@ def show_L2_menu():
     print("3. Exit")
     print("==============================")
 
+def main_runner(first_choice, second_choice):
+    if first_choice == "1":
+        print("YOLOv8 Pipeline Triggered!")
+        if second_choice == "1":
+            print("YOLOv8 Training!")
+        elif second_choice == "2":
+            print("YOLOv8 Evaluating!")
+        else:
+            sys.exit(0)
+    
+    elif first_choice == "2":
+        print("Faster R-CNN Pipeline Triggered!")
+        if second_choice == "1":
+            print("Faster R-CNN Training!")
+        elif second_choice == "2":
+            print("Faster R-CNN Evaluating!")
+        else:
+            sys.exit(0)
+    
+    elif first_choice == "3":
+        print("DETR")
+        if second_choice == "1":
+            print("DETR Training!")
+        elif second_choice == "2":
+            print("DETR Evaluating!")
+        else:
+            sys.exit(0)
+    
+    else:
+        print("Exit")
+        sys.exit(0)
+
+
 def main():
-    while True:
+    # while True:
         show_main_menu()
-        choice = input("Enter your choice (1-4): ").strip()
+        first_choice = input("Enter your model choice (1-4): ").strip()
 
-        if choice == "1":
+        if first_choice == "1":
             CONFIG["experiment_name"] = "yolov8_exp"
-            run_yolov8()
+            show_L2_menu()
+            second_choice = input("Enter your model operation (1-3): ").strip()
+            main_runner(first_choice, second_choice)
+            # run_yolov8()
 
-        elif choice == "2":
+        elif first_choice == "2":
             CONFIG["experiment_name"] = "faster_rcnn"
-            run_fasterrcnn()
+            show_L2_menu()
+            second_choice = input("Enter your model operation (1-3): ").strip()
+            main_runner(first_choice, second_choice)
+            # run_fasterrcnn()
 
-        elif choice == "3":
+        elif first_choice == "3":
             CONFIG["experiment_name"] = "detr"
-            run_detr()
+            show_L2_menu()
+            second_choice = input("Enter your model operation (1-3): ").strip()
+            main_runner(first_choice, second_choice)
+            # run_detr()
 
-        elif choice == "4":
+        elif first_choice == "4":
             print("\n👋 Exiting...")
             sys.exit(0)
 
