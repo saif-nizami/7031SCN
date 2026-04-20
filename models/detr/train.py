@@ -102,7 +102,7 @@ def train_model(config):
 
     torch.save(model.state_dict(), "outputs/detr.pth")
 
-    print("🎉 DETR Training Completed Successfully!")
+    print("DETR Training Completed Successfully!")
 
 
 # =========================

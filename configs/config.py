@@ -2,7 +2,7 @@ CONFIG = {
     "model_def": {1: "YOLOv8", 2: "Faster R-CNN", 3: "DETR"},
     "model_name": "yolov8n.pt",
     "data_yaml": "data/coco_yolo_subset/dataset.yaml",
-    "epochs": 1,          # TEST RUN   
+    "epochs": 5,          # TEST RUN   
     "img_size": 640,
     "batch_size": 8,         
     "device": "cuda",        
