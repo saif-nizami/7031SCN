@@ -17,10 +17,11 @@ from utils.save_metrics import save_metrics
 
 # fasterRCNN
 from models.faster_rcnn.train import train_model as train_frcnn
-from models.faster_rcnn.main_eval import evaluate_model
+from models.faster_rcnn.main_eval import evaluate_model as evaluate_frcnn
 
 # DETR
 from models.detr.train import train_model as train_detr
+from models.detr.main_eval import evaluate_model as evaluate_detr
 
 def frcnn_collate_fn(batch):
         batch = [b for b in batch if b is not None]
@@ -68,7 +69,7 @@ def frcnn_eval_helper():
     # mapping back to COCO category IDs
     label2cat = {v: k for k, v in dataset.cat2label.items()}
 
-    metrics = evaluate_model(model, val_loader, coco_gt, device, label2cat)
+    metrics = evaluate_frcnn(model, val_loader, coco_gt, device, label2cat)
 
 class detr_CollateFn:
     def __call__(self, batch):
@@ -127,7 +128,7 @@ def detr_eval_helper():
     model.load_state_dict(torch.load("outputs/detr.pth", map_location=device))
     model.to(device)
 
-    evaluate_model(model, loader, coco_gt, device, processor)
+    evaluate_detr(model, loader, coco_gt, device, processor)
 
 def show_main_menu():
     print("\n==============================")
