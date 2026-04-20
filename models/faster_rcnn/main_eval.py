@@ -5,8 +5,8 @@ from pycocotools.cocoeval import COCOeval
 from pycocotools.coco import COCO
 import torchvision
 
-# from models.faster_rcnn.dataset import COCODataset
-from dataset import COCODataset
+from models.faster_rcnn.dataset import COCODataset
+# from dataset import COCODataset
 
 import torchvision.transforms as T
 
@@ -69,13 +69,13 @@ def evaluate_model(model, dataloader, coco_gt, device, label2cat):
 
                     results.append({
                         "image_id": img_id,
-                        "category_id": int(label2cat[int(label)]),  # 🔥 FIXED
+                        "category_id": int(label2cat[int(label)]),  # FIXED
                         "bbox": [x1, y1, w, h],
                         "score": float(score)
                     })
 
     if len(results) == 0:
-        print("❌ No valid predictions found!")
+        print("No valid predictions found!")
         return {}
 
     # COCO evaluation
@@ -120,7 +120,7 @@ def evaluate_model(model, dataloader, coco_gt, device, label2cat):
     }
 
 
-# ✅ MAIN BLOCK (FIXED)
+# MAIN BLOCK (FIXED)
 if __name__ == "__main__":
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -141,7 +141,7 @@ if __name__ == "__main__":
 
     coco_gt = COCO("data/coco_faster_rcnn_subset/annotations/instances_val2017.json")
 
-    # 🔥 rebuild model
+    # rebuild model
     num_classes = len(dataset.cat_ids)
 
     model = torchvision.models.detection.fasterrcnn_mobilenet_v3_large_fpn(weights=None)
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     model.load_state_dict(torch.load("outputs/faster_rcnn.pth"))
     model.to(device)
 
-    # 🔥 mapping back to COCO category IDs
+    # mapping back to COCO category IDs
     label2cat = {v: k for k, v in dataset.cat2label.items()}
 
     metrics = evaluate_model(model, val_loader, coco_gt, device, label2cat)
